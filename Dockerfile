@@ -1,9 +1,7 @@
-FROM readytalk/nodejs
-
-# Add our configuration files and scripts
-WORKDIR /app
-ADD . /app
-RUN npm install
-EXPOSE 80
-
-ENTRYPOINT ["/nodejs/bin/npm", "start"]
+FROM python:3-alpine
+WORKDIR /usr/src/app
+EXPOSE 8000
+COPY requirements.txt .
+RUN pip install -qr requirements.txt
+COPY server.py .
+CMD ["python3", "./server.py"]
